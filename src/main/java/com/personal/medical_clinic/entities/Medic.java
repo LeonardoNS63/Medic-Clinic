@@ -3,7 +3,9 @@ package com.personal.medical_clinic.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_medic")
@@ -18,6 +20,9 @@ public class Medic {
     private String specialization;
     @Column(nullable = false)
     private String phone;
+
+    @OneToMany(mappedBy = "medic", cascade = CascadeType.ALL)
+    private Set<Appointments> ap = new HashSet<>();
 
     public Medic() { }
 

@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_patient")
@@ -18,6 +20,9 @@ public class Patient implements Serializable {
     private String name;
     @Column(nullable = false)
     private String phone;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+    private Set<Appointments> ap = new HashSet<>();
 
     public Patient () { }
 

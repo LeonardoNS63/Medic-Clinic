@@ -3,6 +3,8 @@ package com.personal.medical_clinic.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -20,13 +22,18 @@ public class Appointments implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "medic_id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @JoinColumn(name = "medic_id", nullable = true)
     private Medic medic;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "patient_id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
+    @JoinColumn(name = "patient_id", nullable = true)
     private Patient patient;
+
+    private String doctorName;
+    private String patientName;
 
     public Appointments(){ }
 
@@ -35,6 +42,24 @@ public class Appointments implements Serializable {
         this.moment = moment;
         this.medic = medic;
         this.patient = patient;
+        this.doctorName = medic != null ? medic.getName() : null;
+        this.patientName = patient != null ? patient.getName() : null;
+    }
+
+    public String getDoctorName() {
+        return doctorName;
+    }
+
+    public void setDoctorName(String doctorName) {
+        this.doctorName = doctorName;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 
     public Long getId() {

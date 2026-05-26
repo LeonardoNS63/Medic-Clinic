@@ -21,7 +21,7 @@ public class Medic {
     @Column(nullable = false)
     private String phone;
 
-    @OneToMany(mappedBy = "medic", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "medic")
     private Set<Appointments> ap = new HashSet<>();
 
     public Medic() { }

@@ -4,4 +4,12 @@ import com.personal.medical_clinic.entities.Appointments;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface AppointmentsRepository extends JpaRepository<Appointments, Long> { }
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+
+public interface AppointmentsRepository extends JpaRepository<Appointments, Long> {
+
+    boolean existsByMedicIdAndDateAndTime(Long medicId, LocalDate date, LocalTime time);
+
+}

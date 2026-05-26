@@ -1,6 +1,7 @@
 package com.personal.medical_clinic.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
@@ -8,6 +9,8 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
@@ -18,7 +21,9 @@ public class Appointments implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Instant moment;
+    private LocalDate date;
+
+    private LocalTime time;
 
     @JsonIgnore
     @ManyToOne
@@ -37,13 +42,30 @@ public class Appointments implements Serializable {
 
     public Appointments(){ }
 
-    public Appointments(Long id, Instant moment, Medic medic, Patient patient) {
+    public Appointments(Long id, LocalDate date,LocalTime time, Medic medic, Patient patient) {
         this.id = id;
-        this.moment = moment;
+        this.date = date;
+        this.time = time;
         this.medic = medic;
         this.patient = patient;
         this.doctorName = medic != null ? medic.getName() : null;
         this.patientName = patient != null ? patient.getName() : null;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 
     public String getDoctorName() {
@@ -70,14 +92,6 @@ public class Appointments implements Serializable {
         this.id = id;
     }
 
-    public Instant getMoment() {
-        return moment;
-    }
-
-    public void setMoment(Instant moment) {
-        this.moment = moment;
-    }
-
     public Medic getMedic() {
         return medic;
     }
@@ -98,11 +112,11 @@ public class Appointments implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Appointments that = (Appointments) o;
-        return Objects.equals(id, that.id) && Objects.equals(moment, that.moment) && Objects.equals(medic, that.medic) && Objects.equals(patient, that.patient);
+        return Objects.equals(id, that.id) && Objects.equals(date, that.date) && Objects.equals(time, that.time) && Objects.equals(medic, that.medic) && Objects.equals(patient, that.patient) && Objects.equals(doctorName, that.doctorName) && Objects.equals(patientName, that.patientName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, moment, medic, patient);
+        return Objects.hash(id, date, time, medic, patient, doctorName, patientName);
     }
 }

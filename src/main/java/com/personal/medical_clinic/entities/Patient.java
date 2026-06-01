@@ -20,16 +20,25 @@ public class Patient implements Serializable {
     @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false)
+    @NotBlank
+    private String email;
+
     @OneToMany(mappedBy = "patient")
     private Set<Appointments> ap = new HashSet<>();
 
     public Patient () { }
 
-    public Patient(Long id, String name, String phone) {
+    public Patient(Long id, String name, String phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
+        this.email = email;
     }
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public Long getId() { return id; }
 

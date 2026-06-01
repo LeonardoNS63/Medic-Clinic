@@ -20,17 +20,27 @@ public class Medic {
     @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false)
+    @NotBlank
+    private String email;
+
     @OneToMany(mappedBy = "medic")
     private Set<Appointments> ap = new HashSet<>();
 
     public Medic() { }
 
-    public Medic(Long id, String name, String specialization, String phone) {
+    public Medic(Long id, String name, String specialization, String phone, String email) {
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.phone = phone;
+        this.email = email;
     }
+
+
+    public String getEmail() { return email; }
+
+    public void setEmail(String email) { this.email = email; }
 
     public Long getId() { return id; }
 

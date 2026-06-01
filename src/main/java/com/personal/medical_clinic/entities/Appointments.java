@@ -1,17 +1,14 @@
 package com.personal.medical_clinic.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.personal.medical_clinic.entities.enums.AppointmentsStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Objects;
 
 @Entity
@@ -22,9 +19,10 @@ public class Appointments implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;
+    @NotNull
+    private Integer appointmentStatus;
 
-    private LocalTime time;
+    private Instant moment;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
@@ -43,31 +41,28 @@ public class Appointments implements Serializable {
 
     public Appointments(){ }
 
-    public Appointments(Long id, LocalDate date,LocalTime time, Medic medic, Patient patient) {
+    public Appointments(Long id, Instant moment, Medic medic, Patient patient, AppointmentsStatus appointmentsStatus) {
         this.id = id;
-        this.date = date;
-        this.time = time;
+        this.moment = moment;
         this.medic = medic;
         this.patient = patient;
         this.doctorName = medic != null ? medic.getName() : null;
         this.patientName = patient != null ? patient.getName() : null;
+        setAppointmentStatus(appointmentsStatus);
     }
 
-    public LocalDate getDate() {
-        return date;
+    public AppointmentsStatus getAppointmentStatus() { return AppointmentsStatus.valueOf(appointmentStatus); }
+
+    public void setAppointmentStatus(AppointmentsStatus appointmentStatus) {
+        if (appointmentStatus != null) {
+            this.appointmentStatus = appointmentStatus.getCode();
+        }
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
 
-    public LocalTime getTime() {
-        return time;
-    }
+    public Instant getMoment() { return moment; }
 
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
+    public void setMoment(Instant moment) { this.moment = moment; }
 
     public String getDoctorName() {
         return doctorName;
@@ -113,11 +108,11 @@ public class Appointments implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Appointments that = (Appointments) o;
-        return Objects.equals(id, that.id) && Objects.equals(date, that.date) && Objects.equals(time, that.time) && Objects.equals(medic, that.medic) && Objects.equals(patient, that.patient) && Objects.equals(doctorName, that.doctorName) && Objects.equals(patientName, that.patientName);
+        return Objects.equals(id, that.id) && Objects.equals(appointmentStatus, that.appointmentStatus) && Objects.equals(moment, that.moment) && Objects.equals(medic, that.medic) && Objects.equals(patient, that.patient) && Objects.equals(doctorName, that.doctorName) && Objects.equals(patientName, that.patientName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, time, medic, patient, doctorName, patientName);
+        return Objects.hash(id, appointmentStatus, moment, medic, patient, doctorName, patientName);
     }
 }

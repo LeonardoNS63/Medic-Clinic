@@ -1,4 +1,4 @@
-# 🏥 Medic Clinic
+# 🏥 Medical Clinic
 
 ## 🇧🇷 Português
 

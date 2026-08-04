@@ -2,6 +2,7 @@ package com.personal.medical_clinic.resources;
 
 import com.personal.medical_clinic.entities.Patient;
 import com.personal.medical_clinic.servicies.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500/perfil.html")
 @RestController
 @RequestMapping(value = "/patients")
 public class PatientResource {
@@ -42,7 +44,7 @@ public class PatientResource {
     }
 
     @PostMapping
-    public ResponseEntity<Patient> insert(@RequestBody Patient obj) {
+    public ResponseEntity<Patient> insert(@Valid @RequestBody Patient obj) {
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(obj.getId()).toUri();

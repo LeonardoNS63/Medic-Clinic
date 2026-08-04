@@ -1,7 +1,10 @@
 package com.personal.medical_clinic.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -14,13 +17,18 @@ public class Patient implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     @NotBlank
     private String name;
-    @Column(nullable = false)
+
+    @NotBlank
+    @Pattern(regexp = "^\\d{10,11}$", message = "Telefone deve ter 10 ou 11 dígitos")
+    @Column(nullable = false, unique = true)
     private String phone;
 
-    @Column(nullable = false)
+    @Email
+    @Column(nullable = false, unique = true)
     @NotBlank
     private String email;
 

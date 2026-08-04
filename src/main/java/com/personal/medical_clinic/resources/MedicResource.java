@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500/perfil.html")
 @RestController
 @RequestMapping(value = "/doctors")
 public class MedicResource {

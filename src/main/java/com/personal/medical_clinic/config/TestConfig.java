@@ -31,8 +31,8 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Patient p1 = new Patient(null, "Leandro", "11 99999-9999", "leandro123@gmail.com");
-        Patient p2 = new Patient(null, "Xuxa", "10 99999-9888", "xuxa@hotmail.com");
+        Patient p1 = new Patient(null, "Leandro", "11999999999", "leandro123@gmail.com");
+        Patient p2 = new Patient(null, "Xuxa", "10999999998", "xuxa@hotmail.com");
 
         patientRepository.saveAll((Arrays.asList(p1, p2)));
 

@@ -1,0 +1,56 @@
+/*Mobile First Main*/
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Patrick+Hand&display=swap');
+
+
+section#Titulo_inicio {
+    background-color: #8cf172;
+    padding: 50px 5px;
+    margin: 10px 0px;
+}
+
+section#Titulo_inicio h1 {
+    text-align: center;
+    color: rgba(0, 0, 0, 0.753);
+}
+
+section#Apresentacao {
+    background-color: rgba(80, 80, 80, 0.473);
+    margin: 10px 10px;
+    padding: 3px 0px;
+    border-radius: 4px;
+}
+
+section#Apresentacao h1 {
+    text-align: center;
+    padding-top: 20px;
+    color: rgba(0, 0, 0, 0.753);
+}
+
+
+
+section.apre_elements {
+    background-color: rgba(250, 250, 250, 0.849);
+    padding-bottom: 10px;
+    margin: 30px 20px;
+    color: rgba(0, 0, 0, 0.788);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.486);
+}
+
+section.apre_elements h2 {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    font-weight: normal;
+}
+
+section.apre_elements p {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+div.imagem img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

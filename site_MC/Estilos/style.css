@@ -10,13 +10,11 @@
 :root {
     --Fundo: #77be66;
     --Fundo_Destaque: #569d47;
-    --Botao_hover: #98de857e;
-    
+    --Botao_hover: #98de857e; 
 }
 
 body {
     background-color: var(--Fundo);
-    overflow-y: hidden;
     opacity: 0;
     transition: opacity 0.5s ease-in;
 }
@@ -29,9 +27,10 @@ body.loaded {
 /*HEADER*/
 
 header {
-    
     background-color: var(--Fundo_Destaque);
-
+    position: sticky;
+    top: 0;
+    z-index: 1;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;

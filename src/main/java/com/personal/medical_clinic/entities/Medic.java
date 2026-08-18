@@ -2,6 +2,8 @@ package com.personal.medical_clinic.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,7 +19,10 @@ public class Medic {
     @NotBlank
     private String name;
     private String specialization;
-    @Column(nullable = false)
+
+    @NotBlank
+    @Pattern(regexp = "^\\d{10,11}$", message = "Telefone deve ter 10 ou 11 dígitos")
+    @Column(nullable = false, unique = true)
     private String phone;
 
     @Column(nullable = false)

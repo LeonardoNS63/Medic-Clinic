@@ -36,8 +36,8 @@ public class TestConfig implements CommandLineRunner {
 
         patientRepository.saveAll((Arrays.asList(p1, p2)));
 
-        Medic m1 = new Medic(null, "Igor", "Dermatologista", "12 88888-8888", "doutor.igor@gmail.com");
-        Medic m2 = new Medic(null, "Carlos", "Cardiologista", "12 11188-8888", "doutor.carlos@hotmail.com");
+        Medic m1 = new Medic(null, "Igor", "Dermatologista", "12888888888", "doutor.igor@gmail.com");
+        Medic m2 = new Medic(null, "Carlos", "Cardiologista", "12111888888", "doutor.carlos@hotmail.com");
 
         medicRepository.saveAll((Arrays.asList(m1, m2)));
 

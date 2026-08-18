@@ -2,15 +2,17 @@
 
 main#main_perfil {
     display: grid;
-    grid-template-columns: auto 90% auto;
+    grid-template-columns: auto 95% auto;
 }
 
 section#section_busca {
     grid-column: 2;
     background-color: #337d28;
-    height: 100vh;
+    min-height: 100vh;
     padding: 10px;
 }
+
+/*div de busca*/
 
 div#input_busca {    
     color: white;
@@ -39,14 +41,6 @@ input#input {
     padding: 4px;
 } 
 
-
-div#resultado {
-    margin-top: 40px;
-    background-color: white;
-    height: 300px;
-    box-shadow: 1px 1px 4px black;
-}
-
 fieldset#perfil {
     display: flex;
     padding: 10px;
@@ -59,5 +53,43 @@ fieldset#perfil input {
     text-align: center;
 }
 
+div#infos {
+    padding: 20px;    
+    margin-top: 40px;
+    background-color: #77be66;
+    height: auto;
+    box-shadow: 1px 1px 4px black;
+}
 
+
+/*Infos Display div*/
+
+div#infos_interno{
+    visibility: hidden;
+}
+
+div#infos_interno h3 {
+    padding-bottom: 30px;
+    font-size: 1.8em;
+}
+
+div#infos_interno p#informacoes_p {
+    font-size: 1.3em;
+    font-weight: bold;
+    padding-bottom: 20px;
+    opacity: 0.8;
+}
+
+p.tipo_info {
+    font-size: 1.1em;
+    color: rgba(0, 0, 0, 0.637);
+    padding-bottom: 5px;
+    padding-top: 10px ;
+    font-weight: bolder;
+}
+
+p.display_info {
+    /*visibility: hidden;*/
+    font-size: 1.4em;
+}
 

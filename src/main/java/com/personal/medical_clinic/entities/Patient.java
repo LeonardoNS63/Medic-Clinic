@@ -32,6 +32,7 @@ public class Patient implements Serializable {
     @NotBlank
     private String email;
 
+
     @OneToMany(mappedBy = "patient")
     private Set<Appointments> ap = new HashSet<>();
 

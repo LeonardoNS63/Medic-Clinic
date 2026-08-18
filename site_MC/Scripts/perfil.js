@@ -17,7 +17,7 @@ async function buscar() {
     }
 
     if (!radioPaciente.checked && !radioMedico.checked) {
-        resultado_p.textContent = "Campo em branco: selecione um perfil";
+        resultadoEl.textContent = "Campo em branco: selecione um perfil";
         return;
     }
 
@@ -34,7 +34,19 @@ async function buscar() {
             return;
         }
 
+        // Criação de um objeto JS com a resposta do fetch 
         const dados = await resposta.json();
+
+        //retira do objeto JS os valores desejados e os aplica em seus devidos lugares
+        document.getElementById("saudacao").textContent = "Olá, " + dados.name;
+
+        document.getElementById("nome").textContent = dados.name;
+        document.getElementById("tel").textContent = dados.phone;
+        document.getElementById("email").textContent = dados.email;
+
+        document.getElementById("infos_interno").style.visibility = "visible";
+        
+        // Transforma em json
         resultadoEl.textContent = JSON.stringify(dados, null, 2);
 
     } catch (erro) {

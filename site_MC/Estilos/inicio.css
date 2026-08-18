@@ -54,3 +54,8 @@ div.imagem img {
     height: auto;
     display: block;
 }
+
+footer {
+    background-color: #569d47;
+    padding: 20px;
+}

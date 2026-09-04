@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Clínica Médica</title>
+</head>
+<body>
+
+    <div id="app">
+
+        <header>
+            <h1>Medical Clinic</h1>
+            <p>Acesse sua conta</p>
+        </header>
+
+        <main>
+            <section id="secao-login">
+                <h2>Login</h2>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="Digite seu email"
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div>
+                    <label for="senha">Senha</label>
+                    <input 
+                        type="password" 
+                        id="senha" 
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <!-- Mensagem de erro/feedback -->
+                <p id="mensagem-erro" style="display: none;"></p>
+
+                <button id="btn-login" onclick="login()">Entrar</button>
+
+                <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+            </section>
+        </main>
+
+    </div>
+
+    <script src="Scripts/login.js"></script>
+
+</body>
+</html>

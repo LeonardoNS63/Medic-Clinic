@@ -18,36 +18,34 @@ public class Patient implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    @NotBlank
+    @OneToOne
+    @JoinColumn(name = "usuario_id") // coluna FK na tabela patient
+    private User usuario;
+
     private String name;
 
-    @NotBlank
     @Pattern(regexp = "^\\d{10,11}$", message = "Telefone deve ter 10 ou 11 dígitos")
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String phone;
-
-    @Email
-    @Column(nullable = false, unique = true)
-    @NotBlank
-    private String email;
-
 
     @OneToMany(mappedBy = "patient")
     private Set<Appointments> ap = new HashSet<>();
 
     public Patient () { }
 
-    public Patient(Long id, String name, String phone, String email) {
+    public Patient(Long id, String name, String phone) {
         this.id = id;
         this.name = name;
         this.phone = phone;
-        this.email = email;
     }
 
-    public String getEmail() { return email; }
+    public User getUsuario() {
+        return usuario;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
 
     public Long getId() { return id; }
 

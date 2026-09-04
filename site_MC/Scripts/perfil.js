@@ -1,3 +1,17 @@
+function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+}
+
+function verificarLogin() {
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = "login.html";
+    }
+}
+
+verificarLogin();
+
 window.addEventListener("load", () => {
     document.body.classList.add("loaded");
 });
@@ -27,10 +41,22 @@ async function buscar() {
     resultadoEl.textContent = "Buscando...";
 
     try {
-        const resposta = await fetch(`http://localhost:8080/${tipo}/${id}`);
+        const resposta = await fetch(`http://localhost:8080/${tipo}/${id}`, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
 
         if (!resposta.ok) {
             resultadoEl.textContent = `Erro: ${label} não encontrado (status ${resposta.status})`;
+            return;
+        }
+
+        if (resposta.status === 403 || resposta.status === 401) {
+            localStorage.removeItem("token");
+            window.location.href = "login.html";
             return;
         }
 

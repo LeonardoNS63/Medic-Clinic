@@ -1,9 +1,7 @@
 package com.personal.medical_clinic.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.personal.medical_clinic.entities.enums.AppointmentsStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -18,9 +16,6 @@ public class Appointments implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    private Integer appointmentStatus;
 
     private Instant moment;
 
@@ -41,24 +36,14 @@ public class Appointments implements Serializable {
 
     public Appointments(){ }
 
-    public Appointments(Long id, Instant moment, Medic medic, Patient patient, AppointmentsStatus appointmentsStatus) {
+    public Appointments(Long id, Instant moment, Medic medic, Patient patient) {
         this.id = id;
         this.moment = moment;
         this.medic = medic;
         this.patient = patient;
         this.doctorName = medic != null ? medic.getName() : null;
         this.patientName = patient != null ? patient.getName() : null;
-        setAppointmentStatus(appointmentsStatus);
     }
-
-    public AppointmentsStatus getAppointmentStatus() { return AppointmentsStatus.valueOf(appointmentStatus); }
-
-    public void setAppointmentStatus(AppointmentsStatus appointmentStatus) {
-        if (appointmentStatus != null) {
-            this.appointmentStatus = appointmentStatus.getCode();
-        }
-    }
-
 
     public Instant getMoment() { return moment; }
 
@@ -108,11 +93,11 @@ public class Appointments implements Serializable {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Appointments that = (Appointments) o;
-        return Objects.equals(id, that.id) && Objects.equals(appointmentStatus, that.appointmentStatus) && Objects.equals(moment, that.moment) && Objects.equals(medic, that.medic) && Objects.equals(patient, that.patient) && Objects.equals(doctorName, that.doctorName) && Objects.equals(patientName, that.patientName);
+        return Objects.equals(id, that.id) && Objects.equals(moment, that.moment) && Objects.equals(medic, that.medic) && Objects.equals(patient, that.patient) && Objects.equals(doctorName, that.doctorName) && Objects.equals(patientName, that.patientName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, appointmentStatus, moment, medic, patient, doctorName, patientName);
+        return Objects.hash(id, moment, medic, patient, doctorName, patientName);
     }
 }

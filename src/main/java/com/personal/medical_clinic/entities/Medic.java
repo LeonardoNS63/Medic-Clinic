@@ -15,37 +15,38 @@ public class Medic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
-    @NotBlank
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private User usuario;
+
     private String name;
+
     private String specialization;
 
-    @NotBlank
     @Pattern(regexp = "^\\d{10,11}$", message = "Telefone deve ter 10 ou 11 dígitos")
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String phone;
-
-    @Column(nullable = false)
-    @NotBlank
-    private String email;
 
     @OneToMany(mappedBy = "medic")
     private Set<Appointments> ap = new HashSet<>();
 
     public Medic() { }
 
-    public Medic(Long id, String name, String specialization, String phone, String email) {
+    public Medic(Long id, String name, String specialization, String phone) {
         this.id = id;
         this.name = name;
         this.specialization = specialization;
         this.phone = phone;
-        this.email = email;
     }
 
+    public User getUsuario() {
+        return usuario;
+    }
 
-    public String getEmail() { return email; }
-
-    public void setEmail(String email) { this.email = email; }
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
 
     public Long getId() { return id; }
 
